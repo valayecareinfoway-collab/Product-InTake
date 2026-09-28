@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="to-do-list-logo.webp" type="image/x-icon">
+</head>
+
+<body>
+    <h1 class="flex items-center justify-center text-4xl text-[blue] font-extrabold underline mt-16">
+        To-Do List!
+    </h1>
+    <div class="w-[95%] max-w-[500px] my-0 mx-auto flex gap-[20px] mt-[50px]">
+        <input id="add_task"
+            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-500 hover:border-blue-300 shadow-sm focus:shadow"
+            placeholder="Add Task..." />
+        <button type="button" id="add_btn"
+            class="inline-flex items-center text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br hover:cursor-pointer shadow-lg shadow-blue-500/20 dark:shadow-lg font-medium rounded-[10px] text-sm px-6 py-2 text-center leading-5">
+            <svg id="add_icon" class="w-4 h-4 me-2" fill="currentColor" viewBox="0 0 1000 1000"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M856 40H142q-42 0-72 30t-30 72v714q0 42 30 72t72 30h714q42 0 72-30t30-72V142q0-42-30-72t-72-30zM754 550H550v204H448V550H244V448h204V244h102v204h204v102z" />
+            </svg>
+            <span id="add_btn_text">Add</span>
+        </button>
+
+    </div>
+
+
+    <div class="w-[95%] mx-auto mt-[50px] border border-gray-200 rounded-[10px] overflow-hidden">
+
+        <table class="w-full text-left">
+
+            <thead class="bg-gray-100 border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-4 w-[60px]">
+                        Completed
+                    </th>
+
+                    <th class="px-6 py-4">
+                        Tasks
+                    </th>
+
+                    <th class="px-6 py-4 w-[150px] text-center">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody id="task_list">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+
+</html>

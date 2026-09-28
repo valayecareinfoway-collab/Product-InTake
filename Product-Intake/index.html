@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Product Intake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231B2430'/%3E%3Cpath d='M8 12L16 8L24 12V21L16 25L8 21V12Z' fill='none' stroke='%23D6A02B' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M8 12L16 16L24 12M16 16V25' fill='none' stroke='%23D6A02B' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#1B2430',
+                        paper: '#EEF1F0',
+                        amber: '#D6A02B',
+                        sage: '#7C9885',
+                        rust: '#A23B3B',
+                        line: '#C7CDCB'
+                    },
+                    fontFamily: {
+                        slab: ['"Roboto Slab"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        body {
+            background: #EEF1F0;
+        }
+
+        ::selection {
+            background: #D6A02B;
+            color: #1B2430;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-ink min-h-screen">
+
+    <div class="max-w-4xl mx-auto px-6 py-14">
+
+        <!-- Header -->
+        <header class="mb-10 border-b border-line pb-6">
+            <p class="text-sm tracking-wide text-sage font-medium mb-1">Stockroom / Intake Sheet</p>
+            <h1 class="font-slab font-bold text-4xl md:text-5xl text-ink">Product Intake</h1>
+            <p class="text-ink/60 mt-2 max-w-md">Log a new item, then it lands in the catalog below.</p>
+        </header>
+
+        <!-- Intake form -->
+        <section id="product_form"
+            class="bg-white border border-line rounded-sm p-6 md:p-8 mb-12 shadow-[0_1px_0_0_rgba(27,36,48,0.06)]">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                <div>
+                    <label for="product_name" class="block text-sm font-medium text-ink/70 mb-1.5">Product name</label>
+                    <input type="text" id="product_name" placeholder="e.g. Ceramic table lamp"
+                        class="w-full border border-line rounded-sm px-3 py-2.5 bg-paper/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber/60 focus:border-amber transition">
+                </div>
+
+                <div>
+                    <label for="product_price" class="block text-sm font-medium text-ink/70 mb-1.5">Price</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink/40 text-sm">₹</span>
+                        <input type="number" id="product_price" placeholder="0" min="0" step="1"
+                            class="w-full border border-line rounded-sm pl-7 pr-3 py-2.5 bg-paper/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber/60 focus:border-amber transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="product_image" class="block text-sm font-medium text-ink/70 mb-1.5">Product
+                        image</label>
+                    <label for="product_image"
+                        class="flex items-center gap-2.5 w-full border border-dashed border-line rounded-sm px-3 py-2.5 bg-paper/40 hover:bg-paper/70 hover:border-amber cursor-pointer transition group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" class="w-5 h-5 text-ink/40 group-hover:text-amber transition shrink-0">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 16V4m0 0L7 9m5-5l5 5M5 16v2a2 2 0 002 2h10a2 2 0 002-2v-2" />
+                        </svg>
+                        <span class="text-sm text-ink/60 truncate">Choose an image…</span>
+                        <input type="file" id="product_image" accept="image/*" class="sr-only">
+                    </label>
+                </div>
+
+                <div>
+                    <label for="product_type" class="block text-sm font-medium text-ink/70 mb-1.5">Product type</label>
+                    <select id="product_type"
+                        class="w-full border border-line rounded-sm px-3 py-2.5 bg-paper/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber/60 focus:border-amber transition">
+                        <option selected disabled>Select a type</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Home Decor">Home Decor</option>
+                        <option value="Kitchen">Kitchen</option>
+                        <option value="Apparel">Apparel</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button id="add_product_btn" type="button"
+                class="mt-6 inline-flex items-center gap-2 bg-ink text-paper px-5 py-2.5 rounded-sm font-medium hover:bg-ink/90 active:scale-[0.98] transition">
+                Add product
+            </button>
+        </section>
+
+        <!-- Output cards -->
+        <section>
+            <h2 id="output_heading" class="font-slab font-bold text-2xl mb-4 scroll-mt-6">Catalog</h2>
+
+            <div id="output_table" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                <!-- Sample card — this is what one product card looks like. Delete it once your JS renders real cards; the markup below is what to build your template string from. -->
+
+                <div id="empty_row"
+                    class="col-span-full text-center text-ink/40 py-10 border border-dashed border-line rounded-sm">
+                    No products added yet.
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Cart backdrop -->
+    <div id="cart_backdrop"
+        class="fixed inset-0 bg-ink/40 opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
+
+    <!-- Cart trigger -->
+    <button onclick="cartShowBtn()" id="open_cart_btn" type="button"
+        class="fixed top-6 right-6 z-30 w-14 h-14 rounded-full bg-ink text-paper shadow-lg shadow-ink/20 flex items-center justify-center hover:bg-ink/90 active:scale-95 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.75" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 4h2l2.4 12.2a2 2 0 002 1.8h8.2a2 2 0 002-1.8L21 8H6M9 20a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
+        </svg>
+        <span id="cart_count"
+            class="absolute -top-1 -right-1 bg-amber text-ink text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+    </button>
+
+    <!-- Cart drawer -->
+    <aside id="cart_drawer"
+        class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white border-l border-line z-50 translate-x-full transition-transform duration-300 flex flex-col">
+
+        <div class="flex items-center justify-between px-5 py-4 border-b border-line"
+            style="padding-top: max(1rem, env(safe-area-inset-top, 0px));">
+            <h2 class="font-slab font-bold text-xl text-ink">Your Cart</h2>
+            <button onclick="cartClose()" id="cart_close_btn" type="button"
+                class="text-ink/50 hover:text-ink transition">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.75" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="cart_items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-4">
+
+            <!-- Sample cart row — this is what one item in the cart looks like once you render it in JS. -->
+
+            <p id="cart_empty" class="hidden text-center text-ink/40 py-10">Your cart is empty.</p>
+        </div>
+
+        <div class="px-5 py-4 border-t border-line"
+            style="padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-sm text-ink/60">Total</span>
+                <span id="cart_total" class="font-semibold text-ink">₹00.00</span>
+            </div>
+            <button id="checkout_btn" type="button" disabled
+                class="w-full bg-ink text-paper py-2.5 rounded-sm font-medium hover:bg-ink/90 active:scale-[0.98] transition">
+                Checkout
+            </button>
+        </div>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
