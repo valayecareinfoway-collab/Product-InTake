@@ -14,6 +14,7 @@ function render_profile() {
     profile_list.innerHTML = "";
 
     for (let i = 0; i < profiles.length; i++) {
+        
 
         profile_list.innerHTML += `
             <tr class="border-b border-gray-200">
